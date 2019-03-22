@@ -1,0 +1,20 @@
+
+version: '2'
+services:
+  app:
+    build: .
+    environment:
+      - VIRTUAL_HOST=websockets.jcirizar.com
+      - VIRTUAL_PORT=80
+      - VIRTUAL_NETWORK=nginx-proxy
+      - LETSENCRYPT_HOST=websockets.jcirizar.com
+      - LETSENCRYPT_EMAIL=websockets.jcirizar.com
+    restart: always
+
+
+networks:
+  proxy-tier:
+    external:
+      name: nginx-proxy
+  back:
+    driver: bridge
